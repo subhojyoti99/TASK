@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: CronJob
+spec:
+  schedule: "*/1 * * * *"  
+  timeZone: "Asia/Kolkata"
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 17
+      template:
+        spec: 
+          containers:
+            -name: busybox-container
+             image: busybox
+             args: 
+             - "/bin/sh"
+             - "-c"
+             - "date; echo 'Hello from K8s Cluster'"
+          restartPolicy: Never   
